@@ -59,7 +59,7 @@ while getopts e:f:h option
 do
 	case "$option"
 	in
-		e) ENV=$OPTARG;;
+	e) ENV=$OPTARG;;
         f) FILE=$OPTARG;;
         h) usage
            exit 0;;
