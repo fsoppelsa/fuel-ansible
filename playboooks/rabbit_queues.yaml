@@ -1,0 +1,9 @@
+- name: Rabbit non empty queues status
+  hosts: controller
+  tasks:
+    - name: Get queues
+      shell: rabbitmqctl list_queues | grep -v 0$
+      register: rabbit_status_out
+
+    - name: Print status
+      debug: var=rabbit_status_out.stdout_lines

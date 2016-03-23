@@ -1,0 +1,9 @@
+- name: Set nova.conf's debug=False on compute hosts
+  hosts: compute
+  tasks:
+    - name: Change debug=False
+      ini_file: dest=/etc/nova/nova.conf
+        section=DEFAULT
+        option=debug
+        value=False
+        backup=yes

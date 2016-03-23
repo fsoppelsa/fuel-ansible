@@ -1,0 +1,9 @@
+- name: Installed packages
+  hosts: compute
+  tasks:
+    - name: Get packages
+      shell: dpkg -l
+      register: packages
+
+    - name: Save package list to file
+      copy: content="{{ packages }}" dest=/tmp/compute_packages.txt

@@ -1,0 +1,9 @@
+- name: Ovs bridges on controllers, computes
+  hosts: controller,compute
+  tasks:
+    - name: Show bridges
+      command: "ovs-vsctl show"
+      register: ovs_vsctl_out
+
+    - name: Print bridges
+      debug: var=ovs_vsctl_out.stdout_lines

@@ -1,0 +1,9 @@
+- name: Rabbit status on controllers
+  hosts: controller
+  tasks:
+    - name: Get status
+      command: rabbitmqctl status
+      register: rabbit_status_out
+
+    - name: Print status
+      debug: var=rabbit_status_out.stdout_lines

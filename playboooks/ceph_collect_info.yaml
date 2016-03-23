@@ -1,0 +1,19 @@
+- name: Collect Ceph info
+  hosts: 10.20.1.8
+  tasks:
+    - name: Retrieve collect_info
+      get_url: url=https://raw.githubusercontent.com/koder-ua/ceph-monitoring/master/ceph_monitoring/collect_info.py dest=/root/collect_info.py
+
+    - name: Run collect_info
+      command: python /root/collect_info.py
+
+    - name: Get archived info
+      shell: ls -t1 /tmp/*gz | tail -1
+      register: archive_file
+  
+    - name: Retrieve visualize_cluster
+      get_url: url=https://raw.githubusercontent.com/koder-ua/ceph-monitoring/master/ceph_monitoring/visualize_cluster.py dest=/root/visualize_cluster.py
+
+    # SOMETHING IS broken here with html2 library etc...
+    - name: Run visualize_Cluster
+      command: python /root/visualize_cluster.py "{{archive_file.stdout}}" -w -g -o OUT_FOLDER

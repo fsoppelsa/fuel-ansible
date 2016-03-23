@@ -1,0 +1,5 @@
+- name: Restart nova-compute
+  hosts: compute
+  tasks:
+    - name: restart
+      service: name=nova-compute state=restarted
